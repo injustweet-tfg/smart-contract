@@ -10,6 +10,7 @@ contract TFGStorage {
    
     mapping(string => uint) storedTweets; //a map with all the tweetsID and the file in which they are
 
+//Stores IPFS files hashes and the tweet´s ids in the data structures
     function setFile(string memory hash, string[] memory tweetsID) external {
         TweetsFile memory tf = TweetsFile(hash, tweetsID);
         tweetsFiles.push(tf);
@@ -18,6 +19,7 @@ contract TFGStorage {
         }
     }
 
+//gets all hashes of ipfs files stored in the contract
     function getFiles() external view returns (TweetsFile[] memory){
         return tweetsFiles;
     }
@@ -26,6 +28,9 @@ contract TFGStorage {
         return tweetsFiles[storedTweets[tweetID]].IPFShash;
     }
 
+
+
+//updates all outdated tweets
     function updateTweets(string memory hash, string[] memory tweetsID) external {
         for(uint j = 0; j < tweetsID.length; j++){
             uint pos = storedTweets[tweetsID[j]];
