@@ -3,7 +3,7 @@ This repository contains the smart contract Solidity code which.
 ### CODE
 
 
-- [TFG_Storage.sol:](https://github.com/injustweet-tfg/smart-contract/TFG_Storage.sol)         This file has the Solidity code of the smart contract we are using to save the tweet's information. It has similar methods to the API. 
+- [TFG_Storage.sol:](https://github.com/injustweet-tfg/smart-contract/TFG_Storage.sol)         This file has the Solidity code of the smart contract we are using to save the tweet's information. It has similar funtions to the API. 
 
   Here can be found an array that for each position is stored the information of an IPFS file, this mean, the hash and the tweet IDs that can be found in it. Also, there is a map which has for each ID, the position from the files array were is the IPFS hash of the file in IPFS which contains the updated tweet info.
 
