@@ -14,7 +14,7 @@ contract TFGStorage {
     function setFile(string memory hash, string[] memory tweetsID) external {
         TweetsFile memory tf = TweetsFile(hash, tweetsID);
         tweetsFiles.push(tf);
-        for(uint i =0; i < tweetsID.length; i++){
+        for(uint i =0; i < tweetsID.length; i++){//Stores the file hash associated to each tweet ID
             storedTweets[tweetsID[i]] = tweetsFiles.length - 1;
         }
     }
@@ -35,7 +35,7 @@ contract TFGStorage {
         for(uint j = 0; j < tweetsID.length; j++){
             uint pos = storedTweets[tweetsID[j]];
 
-            for(uint i = 0; i < tweetsFiles[pos].tweetID.length; i++){
+            for(uint i = 0; i < tweetsFiles[pos].tweetID.length; i++){//Deletes the associated ID of the tweet from the old file
                 if(keccak256(abi.encodePacked(tweetsFiles[pos].tweetID[i])) == keccak256(abi.encodePacked(tweetsID[j]))){
                     tweetsFiles[pos].tweetID[i] = tweetsFiles[pos].tweetID[tweetsFiles[pos].tweetID.length-1];
                     tweetsFiles[pos].tweetID.pop();
@@ -43,11 +43,12 @@ contract TFGStorage {
             }
             if(tweetsFiles[pos].tweetID.length == 0){ 
                                    
-                delete tweetsFiles[pos].tweetID;  
+                delete tweetsFiles[pos].tweetID;  //Delete the array but the file hash still stored for integrity purposes
                           
             }
         }
         
+        //Stores the new file with the updated tweets
         TweetsFile memory tf = TweetsFile(hash, tweetsID);
         tweetsFiles.push(tf);
         for(uint i =0; i < tweetsID.length; i++){
